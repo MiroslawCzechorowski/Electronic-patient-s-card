@@ -24,7 +24,7 @@ import java.util.HashMap;
 public class ViewPatient extends AppCompatActivity implements View.OnClickListener{
     private EditText editTextID;
     private EditText editTextName;
-    private EditText editTextVorname;
+    private EditText editTextLastname;
     private EditText editTextHistory;
 
     // TODO: 28.10.2015 images
@@ -42,7 +42,7 @@ public class ViewPatient extends AppCompatActivity implements View.OnClickListen
 
         editTextID=(EditText)findViewById(R.id.editTextID);
         editTextName=(EditText)findViewById(R.id.editTextName);
-        editTextVorname=(EditText)findViewById(R.id.editTextAddVorname);
+        editTextLastname=(EditText)findViewById(R.id.editTextLastName);
         editTextHistory=(EditText)findViewById(R.id.editTextHistory);
 
         buttonDelete=(Button)findViewById(R.id.buttonDelete);
@@ -84,27 +84,49 @@ public class ViewPatient extends AppCompatActivity implements View.OnClickListen
     }
 
     private void showEmployee(String json){
+        Toast.makeText(getApplicationContext(),"Kontroln",Toast.LENGTH_SHORT).show();
         try {
+            Toast.makeText(getApplicationContext(),"wszedl",Toast.LENGTH_SHORT).show();
             JSONObject jsonObject = new JSONObject(json);
             JSONArray result = jsonObject.getJSONArray(Config.TAG_JSON_ARRAY);
             JSONObject c = result.getJSONObject(0);
+            Toast.makeText(getApplicationContext(),"pobral: "+c,Toast.LENGTH_LONG).show();
             String name = c.getString(Config.TAG_NAME);
-            String vorname = c.getString(Config.TAG_VORNAME);
+            String lastname = c.getString(Config.TAG_LASTNAME);
             String history = c.getString(Config.TAG_HISTORY);
             // TODO: 28.10.2015 images
+            // TODO: 28.10.2015 fix bug. JSON wrong format. 
             editTextName.setText(name);
-            editTextVorname.setText(vorname);
+            editTextLastname.setText(lastname);
             editTextHistory.setText(history);
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
+/*
 
+ JSONObject jsonObject = null;
+        ArrayList<HashMap<String,String>> list = new ArrayList<HashMap<String, String>>();
+        try {
+            jsonObject = new JSONObject(JSON_STRING);
+            JSONArray result = jsonObject.getJSONArray(Config.TAG_JSON_ARRAY);
+
+            for(int i = 0; i<result.length(); i++){
+                JSONObject jo = result.getJSONObject(i);
+                String id = jo.getString(Config.TAG_ID);
+                String name = jo.getString(Config.TAG_NAME);
+
+                HashMap<String,String> employees = new HashMap<>();
+                employees.put(Config.TAG_ID,id);
+                employees.put(Config.TAG_NAME,name);
+                list.add(employees);
+            }
+ */
 
     private void updateEmployee(){
         final String name = editTextName.getText().toString().trim();
-        final String vorname = editTextHistory.getText().toString().trim();
+        final String lastname = editTextLastname.getText().toString().trim();
         final String history = editTextHistory.getText().toString().trim();
 
         class UpdateEmployee extends AsyncTask<Void,Void,String>{
@@ -127,9 +149,9 @@ public class ViewPatient extends AppCompatActivity implements View.OnClickListen
                 HashMap<String,String> hashMap = new HashMap<>();
                 hashMap.put(Config.KEY_PATIENT_ID,id);
                 hashMap.put(Config.KEY_PATIENT_NAME,name);
-                hashMap.put(Config.KEY_PATIENT_VORNAME,vorname);
+                hashMap.put(Config.KEY_PATIENT_LASTNAME,lastname);
                 hashMap.put(Config.KEY_PATIENT_HISTORY,history);
-
+                // TODO: 28.10.2015 images
                 RequestHandler rh = new RequestHandler();
 
                 String s = rh.sendPostRequest(Config.URL_UPDATE_PATIENT,hashMap);
@@ -173,7 +195,7 @@ public class ViewPatient extends AppCompatActivity implements View.OnClickListen
 
     private void confirmDeleteEmployee(){
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setMessage("Are you sure you want to delete this employee?");
+        alertDialogBuilder.setMessage("Are you sure you want to delete this patient?");
 
         alertDialogBuilder.setPositiveButton("Yes",
                 new DialogInterface.OnClickListener() {

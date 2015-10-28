@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,10 +33,9 @@ public class PatientsList extends AppCompatActivity implements ListView.OnItemCl
         setContentView(R.layout.activity_patients_list);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        buttonAddPatient=(Button)findViewById(R.id.buttonAddNew);
         listViewPatients=(ListView)findViewById(R.id.listView);
         listViewPatients.setOnItemClickListener(this);
-        buttonAddPatient=(Button)findViewById(R.id.buttonAddPatient);
         buttonAddPatient.setOnClickListener(this);
         getJSON();
     }
@@ -109,7 +109,8 @@ public class PatientsList extends AppCompatActivity implements ListView.OnItemCl
     @Override
     public void onClick(View v) {
         if(v==buttonAddPatient){
-            startActivity(new Intent(this,AddPatient.class));
+            Intent intent=new Intent(PatientsList.this,AddPatient.class);
+            startActivity(intent);
         }
     }
 }

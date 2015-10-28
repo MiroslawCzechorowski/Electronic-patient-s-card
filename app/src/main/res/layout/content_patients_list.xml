@@ -16,14 +16,13 @@
         android:id="@+id/listView"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/buttonAddPatient" />
+        android:layout_below="@+id/buttonAddNew" />
 
     <Button
-        style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/buttonAddPatient"
-        android:id="@+id/buttonAddPatient"
+        android:text="Add Patient"
+        android:id="@+id/buttonAddNew"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 

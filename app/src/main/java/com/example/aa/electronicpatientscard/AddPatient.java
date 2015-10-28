@@ -54,7 +54,7 @@ public class AddPatient extends AppCompatActivity implements  View.OnClickListen
 
             final String id = editTextID.getText().toString().trim();
             final String name = editTextName.getText().toString().trim();
-            final String vorname = editTextVorname.getText().toString().trim();
+            final String lastname = editTextVorname.getText().toString().trim();
             final String history= editTextHistory.getText().toString().trim();
 
             class AddPatients extends AsyncTask<Void,Void,String> {
@@ -79,7 +79,7 @@ public class AddPatient extends AppCompatActivity implements  View.OnClickListen
                     HashMap<String,String> params = new HashMap<>();
                     params.put(Config.KEY_PATIENT_NAME,name);
                     params.put(Config.KEY_PATIENT_HISTORY,history);
-                    params.put(Config.KEY_PATIENT_VORNAME,vorname);
+                    params.put(Config.KEY_PATIENT_LASTNAME,lastname);
                     params.put(Config.KEY_PATIENT_ID,id);
                     // TODO: 28.10.2015 insert images
 

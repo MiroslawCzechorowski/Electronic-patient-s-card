@@ -16,7 +16,7 @@ public class Config {
     //Keys that will be used to send the request to php scripts
     public static final String KEY_PATIENT_ID = "id";
     public static final String KEY_PATIENT_NAME = "name";
-    public static final String KEY_PATIENT_VORNAME = "vorname";
+    public static final String KEY_PATIENT_LASTNAME = "lastname";
     public static final String KEY_PATIENT_HISTORY = "history";
     public static final String KEY_PATIENT_IMAGES = "images";
     public static final String KEY_LOGIN="login";
@@ -26,7 +26,7 @@ public class Config {
     public static final String TAG_JSON_ARRAY="result";
     public static final String TAG_ID = "id";
     public static final String TAG_NAME = "name";
-    public static final String TAG_VORNAME = "vorname";
+    public static final String TAG_LASTNAME = "lastname";
     public static final String TAG_HISTORY = "history";
     public static final String TAG_IMAGES = "images";
 

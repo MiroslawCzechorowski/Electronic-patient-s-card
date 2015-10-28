@@ -4,8 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -14,7 +12,6 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import java.util.HashMap;
 
 public class Login_activity extends AppCompatActivity implements View.OnClickListener{
@@ -84,7 +81,7 @@ public class Login_activity extends AppCompatActivity implements View.OnClickLis
                     Intent intent=new Intent(Login_activity.this,PatientsList.class);
                     startActivity(intent);
                 }else{
-                    Toast.makeText(getApplicationContext(),"Invalid user name or password",Toast.LENGTH_LONG);
+                    Toast.makeText(getApplicationContext(),"Invalid user name or password",Toast.LENGTH_LONG).show();
                 }
             }
 
