@@ -1,5 +1,8 @@
 package com.example.aa.electronicpatientscard;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -8,9 +11,17 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
-public class Login_activity extends AppCompatActivity {
+import java.util.HashMap;
 
+public class Login_activity extends AppCompatActivity implements View.OnClickListener{
+
+    private EditText editTextLogin;
+    private EditText editTextPassword;
+    private Button buttonLogin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,14 +29,10 @@ public class Login_activity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        editTextLogin=(EditText)findViewById(R.id.editTextLogin);
+        editTextPassword=(EditText)findViewById(R.id.editTextPassword);
+        buttonLogin=(Button)findViewById(R.id.buttonLogin);
+        buttonLogin.setOnClickListener(this);
     }
 
     @Override
@@ -49,4 +56,50 @@ public class Login_activity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void onClick(View v) {
+        if(v==buttonLogin){
+            login();
+        }
+    }
+
+    private void login() {
+        final String login=editTextLogin.getText().toString().trim();
+        final String password=editTextPassword.getText().toString().trim();
+
+        class LoginUser extends AsyncTask<Void,Void,String>{
+            ProgressDialog loading;
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                loading = ProgressDialog.show(Login_activity.this,"Logging...","Wait...",false,false);
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                loading.dismiss();
+                if(s.equalsIgnoreCase("success")){
+                    Intent intent=new Intent(Login_activity.this,PatientsList.class);
+                    startActivity(intent);
+                }else{
+                    Toast.makeText(getApplicationContext(),"Invalid user name or password",Toast.LENGTH_LONG);
+                }
+            }
+
+            @Override
+            protected String doInBackground(Void... v) {
+                HashMap<String,String> params=new HashMap<>();
+                params.put(Config.KEY_LOGIN,login);
+                params.put(Config.KEY_PASSWORD,password);
+                RequestHandler rh = new RequestHandler();
+                String res = rh.sendPostRequest(Config.URL_LOGIN, params);
+                return res;
+            }
+        }
+        LoginUser newLogin = new LoginUser();
+        newLogin.execute();
+    }
+
 }
