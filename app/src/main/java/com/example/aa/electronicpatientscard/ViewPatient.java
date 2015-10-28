@@ -69,6 +69,7 @@ public class ViewPatient extends AppCompatActivity implements View.OnClickListen
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
                 loading.dismiss();
+                Toast.makeText(getApplicationContext(),id+": to id, a pobral z S: "+s,Toast.LENGTH_LONG).show();
                 showEmployee(s);
             }
 
@@ -95,7 +96,7 @@ public class ViewPatient extends AppCompatActivity implements View.OnClickListen
             String lastname = c.getString(Config.TAG_LASTNAME);
             String history = c.getString(Config.TAG_HISTORY);
             // TODO: 28.10.2015 images
-            // TODO: 28.10.2015 fix bug. JSON wrong format. 
+            // TODO: 28.10.2015 fix bug. JSON
             editTextName.setText(name);
             editTextLastname.setText(lastname);
             editTextHistory.setText(history);
