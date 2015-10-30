@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 import java.util.HashMap;
 
@@ -25,6 +26,8 @@ public class Login_activity extends AppCompatActivity implements View.OnClickLis
         setContentView(R.layout.activity_login_activity);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        ImageView logo = (ImageView)findViewById(R.id.imageView);
+        logo.setImageResource(R.drawable.logo);
 
         editTextLogin=(EditText)findViewById(R.id.editTextLogin);
         editTextPassword=(EditText)findViewById(R.id.editTextPassword);
@@ -50,7 +53,6 @@ public class Login_activity extends AppCompatActivity implements View.OnClickLis
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 

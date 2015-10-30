@@ -5,8 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -27,7 +25,7 @@ public class ViewPatient extends AppCompatActivity implements View.OnClickListen
     private EditText editTextLastname;
     private EditText editTextHistory;
 
-    // TODO: 28.10.2015 images
+    private Button buttonImages;
     private Button buttonUpdate;
     private Button buttonDelete;
     private String id;
@@ -47,7 +45,9 @@ public class ViewPatient extends AppCompatActivity implements View.OnClickListen
 
         buttonDelete=(Button)findViewById(R.id.buttonDelete);
         buttonUpdate=(Button)findViewById(R.id.buttonUpdate);
+        buttonImages=(Button)findViewById(R.id.buttonViewImages);
 
+        buttonImages.setOnClickListener(this);
         buttonUpdate.setOnClickListener(this);
         buttonDelete.setOnClickListener(this);
         editTextID.setText(id);
@@ -69,7 +69,7 @@ public class ViewPatient extends AppCompatActivity implements View.OnClickListen
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
                 loading.dismiss();
-                Toast.makeText(getApplicationContext(),id+": to id, a pobral z S: "+s,Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(),id+": to id, a pobral z S: "+s,Toast.LENGTH_LONG).show();
                 showEmployee(s);
             }
 
@@ -87,11 +87,11 @@ public class ViewPatient extends AppCompatActivity implements View.OnClickListen
     private void showEmployee(String json){
         Toast.makeText(getApplicationContext(),"Kontroln",Toast.LENGTH_SHORT).show();
         try {
-            Toast.makeText(getApplicationContext(),"wszedl",Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(),"wszedl",Toast.LENGTH_SHORT).show();
             JSONObject jsonObject = new JSONObject(json);
             JSONArray result = jsonObject.getJSONArray(Config.TAG_JSON_ARRAY);
             JSONObject c = result.getJSONObject(0);
-            Toast.makeText(getApplicationContext(),"pobral: "+c,Toast.LENGTH_LONG).show();
+            //Toast.makeText(getApplicationContext(),"pobral: "+c,Toast.LENGTH_LONG).show();
             String name = c.getString(Config.TAG_NAME);
             String lastname = c.getString(Config.TAG_LASTNAME);
             String history = c.getString(Config.TAG_HISTORY);
@@ -105,25 +105,7 @@ public class ViewPatient extends AppCompatActivity implements View.OnClickListen
             e.printStackTrace();
         }
     }
-/*
 
- JSONObject jsonObject = null;
-        ArrayList<HashMap<String,String>> list = new ArrayList<HashMap<String, String>>();
-        try {
-            jsonObject = new JSONObject(JSON_STRING);
-            JSONArray result = jsonObject.getJSONArray(Config.TAG_JSON_ARRAY);
-
-            for(int i = 0; i<result.length(); i++){
-                JSONObject jo = result.getJSONObject(i);
-                String id = jo.getString(Config.TAG_ID);
-                String name = jo.getString(Config.TAG_NAME);
-
-                HashMap<String,String> employees = new HashMap<>();
-                employees.put(Config.TAG_ID,id);
-                employees.put(Config.TAG_NAME,name);
-                list.add(employees);
-            }
- */
 
     private void updateEmployee(){
         final String name = editTextName.getText().toString().trim();
@@ -142,7 +124,7 @@ public class ViewPatient extends AppCompatActivity implements View.OnClickListen
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
                 loading.dismiss();
-                Toast.makeText(ViewPatient.this, s, Toast.LENGTH_LONG).show();
+                //Toast.makeText(ViewPatient.this, s, Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -223,6 +205,12 @@ public class ViewPatient extends AppCompatActivity implements View.OnClickListen
     public void onClick(View v) {
         if(v == buttonUpdate){
             updateEmployee();
+        }
+
+        if(v==buttonImages){
+            Intent intent = new Intent(this, ViewImages.class);
+            intent.putExtra(Config.PATIENT_ID,id);
+            startActivity(intent);
         }
 
         if(v == buttonDelete){

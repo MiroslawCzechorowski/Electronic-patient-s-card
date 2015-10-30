@@ -4,8 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -14,12 +12,9 @@ import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import android.widget.Toast;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -33,8 +28,10 @@ public class PatientsList extends AppCompatActivity implements ListView.OnItemCl
         setContentView(R.layout.activity_patients_list);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         buttonAddPatient=(Button)findViewById(R.id.buttonAddNew);
         listViewPatients=(ListView)findViewById(R.id.listView);
+
         listViewPatients.setOnItemClickListener(this);
         buttonAddPatient.setOnClickListener(this);
         getJSON();
@@ -79,10 +76,10 @@ public class PatientsList extends AppCompatActivity implements ListView.OnItemCl
                 String id = jo.getString(Config.TAG_ID);
                 String name = jo.getString(Config.TAG_NAME);
 
-                HashMap<String,String> employees = new HashMap<>();
-                employees.put(Config.TAG_ID,id);
-                employees.put(Config.TAG_NAME,name);
-                list.add(employees);
+                HashMap<String,String> patients = new HashMap<>();
+                patients.put(Config.TAG_ID,id);
+                patients.put(Config.TAG_NAME,name);
+                list.add(patients);
             }
 
         } catch (JSONException e) {

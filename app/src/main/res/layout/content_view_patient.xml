@@ -15,7 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="patientssID"
+        android:text="ID"
         android:id="@+id/textViewID"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
@@ -37,7 +37,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="patientsNameVorname"
+        android:text="Name and last name"
         android:id="@+id/textViewName"
         android:layout_below="@+id/editTextID"
         android:layout_alignParentLeft="true"
@@ -52,62 +52,20 @@
         android:layout_below="@+id/textViewName"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_toLeftOf="@+id/buttonDelete"
-        android:layout_toStartOf="@+id/buttonDelete" />
+        android:layout_alignRight="@+id/textViewName"
+        android:layout_alignEnd="@+id/textViewName" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textMultiLine"
-        android:ems="10"
-        android:id="@+id/editTextHistory"
-        android:layout_below="@+id/textViewLastName"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="patientHistory"
+        android:text="History"
         android:id="@+id/textViewLastName"
         android:layout_below="@+id/editTextName"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="patientImages"
-        android:id="@+id/textView"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="buttonUpdate"
-        android:id="@+id/buttonUpdate"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="42dp"
-        android:minWidth="150dp" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="buttonDelete"
-        android:id="@+id/buttonDelete"
-        android:layout_alignTop="@+id/buttonUpdate"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:minWidth="150dp" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -115,8 +73,64 @@
         android:inputType="textPersonName"
         android:ems="10"
         android:id="@+id/editTextLastName"
-        android:layout_below="@+id/textViewName"
-        android:layout_alignLeft="@+id/buttonDelete"
-        android:layout_alignStart="@+id/buttonDelete" />
+        android:layout_alignTop="@+id/editTextName"
+        android:layout_alignRight="@+id/scrollView"
+        android:layout_alignEnd="@+id/scrollView"
+        android:layout_toRightOf="@+id/editTextName"
+        android:layout_toEndOf="@+id/editTextName" />
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/textViewLastName"
+        android:layout_above="@+id/buttonViewImages">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:ems="10"
+            android:id="@+id/editTextHistory"
+            android:layout_below="@+id/textViewLastName"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_above="@+id/buttonUpdate"
+            android:layout_alignRight="@+id/buttonDelete"
+            android:layout_alignEnd="@+id/buttonDelete" />
+    </ScrollView>
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Images"
+        android:id="@+id/buttonViewImages"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delete"
+        android:id="@+id/buttonDelete"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/buttonViewImages"
+        android:layout_toEndOf="@+id/buttonViewImages" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Update"
+        android:id="@+id/buttonUpdate"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/buttonViewImages"
+        android:layout_toStartOf="@+id/buttonViewImages" />
 
 </RelativeLayout>
