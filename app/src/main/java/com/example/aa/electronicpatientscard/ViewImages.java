@@ -59,7 +59,7 @@ public class ViewImages extends AppCompatActivity implements AdapterView.OnItemC
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
+        startActivityForResult(Intent.createChooser(intent, "Select image"), PICK_IMAGE_REQUEST);
     }
 
     @Override
@@ -114,7 +114,6 @@ public class ViewImages extends AppCompatActivity implements AdapterView.OnItemC
 
                 data.put(Config.KEY_UPLOAD, uploadImage);
                 String result = rh.sendPostRequest(Config.URL_UPLOAD_IMAGES+id,data);
-
                 return result;
             }
         }

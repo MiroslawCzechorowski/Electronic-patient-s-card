@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -24,11 +25,12 @@ public class ViewPatient extends AppCompatActivity implements View.OnClickListen
     private EditText editTextName;
     private EditText editTextLastname;
     private EditText editTextHistory;
-
+    private RelativeLayout relativeLayout;
     private Button buttonImages;
     private Button buttonUpdate;
     private Button buttonDelete;
     private String id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +39,9 @@ public class ViewPatient extends AppCompatActivity implements View.OnClickListen
         setSupportActionBar(toolbar);
         Intent intent =getIntent();
         id=intent.getStringExtra(Config.PATIENT_ID);
+
+        relativeLayout=(RelativeLayout)findViewById(R.id.relativeLayout);
+        relativeLayout.requestFocus();
 
         editTextID=(EditText)findViewById(R.id.editTextID);
         editTextName=(EditText)findViewById(R.id.editTextName);
@@ -69,8 +74,7 @@ public class ViewPatient extends AppCompatActivity implements View.OnClickListen
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
                 loading.dismiss();
-                //Toast.makeText(getApplicationContext(),id+": to id, a pobral z S: "+s,Toast.LENGTH_LONG).show();
-                showEmployee(s);
+                showPatient(s);
             }
 
             @Override
@@ -84,19 +88,14 @@ public class ViewPatient extends AppCompatActivity implements View.OnClickListen
         ge.execute();
     }
 
-    private void showEmployee(String json){
-        Toast.makeText(getApplicationContext(),"Kontroln",Toast.LENGTH_SHORT).show();
+    private void showPatient(String json){
         try {
-            //Toast.makeText(getApplicationContext(),"wszedl",Toast.LENGTH_SHORT).show();
             JSONObject jsonObject = new JSONObject(json);
             JSONArray result = jsonObject.getJSONArray(Config.TAG_JSON_ARRAY);
             JSONObject c = result.getJSONObject(0);
-            //Toast.makeText(getApplicationContext(),"pobral: "+c,Toast.LENGTH_LONG).show();
             String name = c.getString(Config.TAG_NAME);
             String lastname = c.getString(Config.TAG_LASTNAME);
             String history = c.getString(Config.TAG_HISTORY);
-            // TODO: 28.10.2015 images
-            // TODO: 28.10.2015 fix bug. JSON
             editTextName.setText(name);
             editTextLastname.setText(lastname);
             editTextHistory.setText(history);
@@ -107,12 +106,12 @@ public class ViewPatient extends AppCompatActivity implements View.OnClickListen
     }
 
 
-    private void updateEmployee(){
+    private void updatePatient(){
         final String name = editTextName.getText().toString().trim();
         final String lastname = editTextLastname.getText().toString().trim();
         final String history = editTextHistory.getText().toString().trim();
 
-        class UpdateEmployee extends AsyncTask<Void,Void,String>{
+        class UpdatePatient extends AsyncTask<Void,Void,String>{
             ProgressDialog loading;
             @Override
             protected void onPreExecute() {
@@ -124,7 +123,6 @@ public class ViewPatient extends AppCompatActivity implements View.OnClickListen
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
                 loading.dismiss();
-                //Toast.makeText(ViewPatient.this, s, Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -134,21 +132,18 @@ public class ViewPatient extends AppCompatActivity implements View.OnClickListen
                 hashMap.put(Config.KEY_PATIENT_NAME,name);
                 hashMap.put(Config.KEY_PATIENT_LASTNAME,lastname);
                 hashMap.put(Config.KEY_PATIENT_HISTORY,history);
-                // TODO: 28.10.2015 images
                 RequestHandler rh = new RequestHandler();
-
-                String s = rh.sendPostRequest(Config.URL_UPDATE_PATIENT,hashMap);
-
+                String s = rh.sendPostRequest(Config.URL_UPDATE_PATIENT, hashMap);
                 return s;
             }
         }
 
-        UpdateEmployee ue = new UpdateEmployee();
-        ue.execute();
+        UpdatePatient up = new UpdatePatient();
+        up.execute();
     }
 
-    private void deleteEmployee(){
-        class DeleteEmployee extends AsyncTask<Void,Void,String> {
+    private void deletePatient(){
+        class DeletePatient extends AsyncTask<Void,Void,String> {
             ProgressDialog loading;
 
             @Override
@@ -172,11 +167,11 @@ public class ViewPatient extends AppCompatActivity implements View.OnClickListen
             }
         }
 
-        DeleteEmployee de = new DeleteEmployee();
-        de.execute();
+        DeletePatient dp = new DeletePatient();
+        dp.execute();
     }
 
-    private void confirmDeleteEmployee(){
+    private void confirmDeletePatient(){
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setMessage("Are you sure you want to delete this patient?");
 
@@ -184,7 +179,7 @@ public class ViewPatient extends AppCompatActivity implements View.OnClickListen
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface arg0, int arg1) {
-                        deleteEmployee();
+                        deletePatient();
                         startActivity(new Intent(ViewPatient.this,ViewPatient.class));
                     }
                 });
@@ -204,7 +199,7 @@ public class ViewPatient extends AppCompatActivity implements View.OnClickListen
     @Override
     public void onClick(View v) {
         if(v == buttonUpdate){
-            updateEmployee();
+            updatePatient();
         }
 
         if(v==buttonImages){
@@ -214,7 +209,7 @@ public class ViewPatient extends AppCompatActivity implements View.OnClickListen
         }
 
         if(v == buttonDelete){
-            confirmDeleteEmployee();
+            confirmDeletePatient();
         }
     }
 }

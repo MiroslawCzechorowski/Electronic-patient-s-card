@@ -19,9 +19,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class PatientsList extends AppCompatActivity implements ListView.OnItemClickListener, View.OnClickListener{
+    //Basic UI
     private ListView listViewPatients;
     private String JSON_STRING;
     private Button buttonAddPatient;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +38,7 @@ public class PatientsList extends AppCompatActivity implements ListView.OnItemCl
         buttonAddPatient.setOnClickListener(this);
         getJSON();
     }
-
+    //get JSON data from server
     private void getJSON() {
         class GetJSON extends AsyncTask<Void,Void,String>{
             ProgressDialog loading;
@@ -63,7 +65,7 @@ public class PatientsList extends AppCompatActivity implements ListView.OnItemCl
         GetJSON gj= new GetJSON();
         gj.execute();
     }
-
+    //List all patients recived from server to listView
     private void showPatient() {
         JSONObject jsonObject = null;
         ArrayList<HashMap<String,String>> list = new ArrayList<HashMap<String, String>>();
@@ -74,11 +76,11 @@ public class PatientsList extends AppCompatActivity implements ListView.OnItemCl
             for(int i = 0; i<result.length(); i++){
                 JSONObject jo = result.getJSONObject(i);
                 String id = jo.getString(Config.TAG_ID);
-                String name = jo.getString(Config.TAG_NAME);
+                String lastname = jo.getString(Config.TAG_LASTNAME);
 
                 HashMap<String,String> patients = new HashMap<>();
                 patients.put(Config.TAG_ID,id);
-                patients.put(Config.TAG_NAME,name);
+                patients.put(Config.TAG_LASTNAME,lastname);
                 list.add(patients);
             }
 
@@ -88,12 +90,12 @@ public class PatientsList extends AppCompatActivity implements ListView.OnItemCl
 
         ListAdapter adapter = new SimpleAdapter(
                 PatientsList.this, list, R.layout.list_item,
-                new String[]{Config.TAG_ID,Config.TAG_NAME},
-                new int[]{R.id.id, R.id.vorname});
+                new String[]{Config.TAG_ID,Config.TAG_LASTNAME},
+                new int[]{R.id.id, R.id.lastname});
 
         listViewPatients.setAdapter(adapter);
     }
-
+    //See patient detail
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intent = new Intent(this, ViewPatient.class);

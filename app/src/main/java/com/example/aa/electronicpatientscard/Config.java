@@ -5,7 +5,7 @@ package com.example.aa.electronicpatientscard;
  */
 public class Config {
 
-    //Address of our scripts of the CRUD
+    //Address of scripts of the CRUD
     public static final String URL_LOGIN="http://serwer1558258.home.pl/login.php";
     public static final String URL_ADD="http://serwer1558258.home.pl/addPatient.php";
     public static final String URL_GET_ALL = "http://serwer1558258.home.pl/getAllPatients.php";
