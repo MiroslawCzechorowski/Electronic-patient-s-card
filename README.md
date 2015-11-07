@@ -1,8 +1,8 @@
-## Elektroniczna karta pacjenta
 ![header](http://imagizer.imageshack.us/a/img907/8701/vWkuKF.jpg)
 
 ## Członkowie zespołu :
 Kacper Mazurkiewicz, 110235. email: kacper267@op.pl  (aplikacja iOS)
+
 Mirosław Czechorowski, 113975. email: miro.cz92@gmail.com (aplikacja Android)
 
 # Opis projektu
@@ -28,10 +28,10 @@ Aplikacja mobilna pobiera dane z bazy MySQL za pośrednictwem API.
 # Środowisko realizacji projektu
 
 Po stronie serwera:
-- [x] PHP
+- PHP
 
 Po stronie klienta:
-- [x] Objective-C (programowanie aplikacji iOS)
-- [x] SBJson (Biblioteka służąca do parsowania formatu Json)
-- [x] Java for Android (programowanie aplikacji Android)
-- [x] org.json (Biblioteka służąca do parsowania formatu Json)
+- Objective-C (programowanie aplikacji iOS)
+- SBJson (Biblioteka służąca do parsowania formatu Json)
+- Java for Android (programowanie aplikacji Android)
+- org.json (Biblioteka służąca do parsowania formatu Json)

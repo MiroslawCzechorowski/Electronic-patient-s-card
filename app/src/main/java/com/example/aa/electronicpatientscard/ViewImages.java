@@ -109,9 +109,7 @@ public class ViewImages extends AppCompatActivity implements AdapterView.OnItemC
             protected String doInBackground(Bitmap... params) {
                 Bitmap bitmap = params[0];
                 String uploadImage = getStringImage(bitmap);
-
                 HashMap<String,String> data = new HashMap<>();
-
                 data.put(Config.KEY_UPLOAD, uploadImage);
                 String result = rh.sendPostRequest(Config.URL_UPLOAD_IMAGES+id,data);
                 return result;
