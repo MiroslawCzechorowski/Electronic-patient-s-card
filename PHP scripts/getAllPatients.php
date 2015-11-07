@@ -3,7 +3,7 @@
 	require_once('dbConnect.php');
 	
 	//Creating sql query
-	$sql = "SELECT * FROM patients";
+	$sql = "SELECT id,lastname FROM patients";
 	
 	//getting result 
 	$r = mysqli_query($con,$sql);
@@ -17,9 +17,7 @@
 		//Pushing name and id in the blank array created 
 		array_push($result,array(
 			"id"=>$row['id'],
-			"name"=>$row['name'],
-			"lastname"=>$row['lastname'],
-			"history"=>$row['history']
+			"lastname"=>$row['lastname']
 		));
 	}
 	
@@ -27,3 +25,4 @@
 	echo json_encode(array('result'=>$result));
 	
 	mysqli_close($con);
+	?>

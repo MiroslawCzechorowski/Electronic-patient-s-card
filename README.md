@@ -6,7 +6,7 @@ Kacper Mazurkiewicz, 110235. email: kacper267@op.pl  (aplikacja iOS)
 Mirosław Czechorowski, 113975. email: miro.cz92@gmail.com (aplikacja Android)
 
 # Opis projektu
-"Elektroniczna karta pacjenta" składa się z bazy danych przechowującej informację na temat pacjentów takich jak: historia choroby, zdjęcia rentegnowskie, dane osobowe czy pobyt w szpitalu. Do bazy danych łączymy się za pomocą klienta mobilnego, który umożliwia przeglądanie oraz edycję w/w danych. Aplikacja usprawnia prowadzenie dokumentacji lekarskiej, która jest dostępna z każdego miejsca. Dzięki temu rozwiązaniu osoby mające dostęp do bazy danych mogą usprawnić przeprowadzanie wywiadu z poszkodowanym. 
+"Elektroniczna karta pacjenta" składa się z bazy danych przechowującej informacje na temat pacjentów takie jak: historia choroby, zdjęcia rentegnowskie, dane osobowe, czy opis pobytu w szpitalu. Do bazy danych łączymy się za pomocą klienta mobilnego, który umożliwia przeglądanie oraz edycję w/w danych. Aplikacja usprawnia prowadzenie dokumentacji lekarskiej, która jest dostępna z każdego miejsca. Dzięki temu rozwiązaniu osoby mające dostęp do bazy danych mogą usprawnić przeprowadzanie wywiadu z poszkodowanym. 
 
 # Założona funkcjonalność
 

@@ -133,7 +133,7 @@ public class ViewImages extends AppCompatActivity implements AdapterView.OnItemC
             protected void onPostExecute(Void v) {
                 super.onPostExecute(v);
                 loading.dismiss();
-                Toast.makeText(ViewImages.this, "Success", Toast.LENGTH_LONG).show();
+                Toast.makeText(ViewImages.this, "Success + id="+id, Toast.LENGTH_LONG).show();
                 ImageAdapter imageAdapter= new ImageAdapter(ViewImages.this,GetAllImages.imageURLs,GetAllImages.bitmaps);
                 gridView.setAdapter(imageAdapter);
             }
