@@ -200,6 +200,7 @@ public class ViewPatient extends AppCompatActivity implements View.OnClickListen
     public void onClick(View v) {
         if(v == buttonUpdate){
             updatePatient();
+            startActivity(new Intent(ViewPatient.this,PatientsList.class));
         }
 
         if(v==buttonImages){
@@ -210,6 +211,7 @@ public class ViewPatient extends AppCompatActivity implements View.OnClickListen
 
         if(v == buttonDelete){
             confirmDeletePatient();
+            startActivity(new Intent(ViewPatient.this, PatientsList.class));
         }
     }
 }

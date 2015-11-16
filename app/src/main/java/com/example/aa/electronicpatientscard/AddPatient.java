@@ -1,9 +1,12 @@
 package com.example.aa.electronicpatientscard;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -40,12 +43,31 @@ public class AddPatient extends AppCompatActivity implements  View.OnClickListen
     @Override
     public void onClick(View v) {
         if(v == buttonAdd){
+            final String id =editTextID.getText().toString().trim();
             addPatient();
-            startActivity(new Intent(this, PatientsList.class));
+            AlertDialog.Builder addImages = new AlertDialog.Builder(this);
+            addImages.setMessage("Do you want add images ?").setCancelable(false);
+            addImages.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Intent intent = new Intent(AddPatient.this, ViewImages.class);
+                    intent.putExtra(Config.PATIENT_ID, id);
+                    startActivity(intent);
+                }
+            });
+            addImages.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Intent intent = new Intent(AddPatient.this, PatientsList.class);
+                    startActivity(intent);
+                }
+            });
+            AlertDialog alert= addImages.create();
+            alert.show();
         }
 
         if(v == buttonCancel){
-            startActivity(new Intent(this,PatientsList.class));
+            startActivity(new Intent(this, PatientsList.class));
         }
     }
 

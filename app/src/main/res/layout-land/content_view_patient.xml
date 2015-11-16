@@ -13,21 +13,12 @@
     android:focusableInTouchMode="true"
     android:id="@+id/relativeLayout">
 
-    <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:id="@+id/imageView3"
-        android:background="@drawable/patient"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="ID"
         android:id="@+id/textViewID"
-        android:layout_below="@+id/imageView3"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -40,8 +31,8 @@
         android:layout_below="@+id/textViewID"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_toLeftOf="@+id/editTextName"
+        android:layout_toStartOf="@+id/editTextName" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -49,10 +40,10 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Name"
         android:id="@+id/textViewName"
-        android:layout_below="@+id/editTextID"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
- />
+        android:layout_toRightOf="@+id/editTextID"
+        android:layout_toEndOf="@+id/editTextID"
+        android:layout_above="@+id/editTextID"
+        android:layout_alignParentTop="true" />
 
     <EditText
         android:layout_width="150dp"
@@ -61,8 +52,8 @@
         android:ems="10"
         android:id="@+id/editTextName"
         android:layout_below="@+id/textViewName"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignRight="@+id/buttonViewImages"
+        android:layout_alignEnd="@+id/buttonViewImages" />
 
 
 
@@ -83,10 +74,9 @@
         android:ems="10"
         android:id="@+id/editTextLastName"
         android:layout_alignTop="@+id/editTextName"
-        android:layout_alignRight="@+id/scrollView"
-        android:layout_alignEnd="@+id/scrollView"
         android:layout_toRightOf="@+id/editTextName"
-        android:layout_toEndOf="@+id/editTextName" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <ScrollView
         android:layout_width="wrap_content"
@@ -111,7 +101,7 @@
             android:layout_above="@+id/buttonUpdate"
             android:layout_alignRight="@+id/buttonDelete"
             android:layout_alignEnd="@+id/buttonDelete"
-            android:maxLines="7"
+            android:maxLines="3"
             android:elegantTextHeight="false" />
     </ScrollView>
 
@@ -135,8 +125,7 @@
         android:text="Images"
         android:id="@+id/buttonViewImages"
         android:layout_alignParentBottom="true"
-        android:layout_alignLeft="@+id/imageView3"
-        android:layout_alignStart="@+id/imageView3" />
+        android:layout_centerHorizontal="true" />
 
     <Button
         style="?android:attr/buttonStyleSmall"

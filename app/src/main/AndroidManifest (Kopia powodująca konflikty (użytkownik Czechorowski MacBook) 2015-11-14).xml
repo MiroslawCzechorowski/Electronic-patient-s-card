@@ -36,9 +36,7 @@
         <activity
             android:name=".AddPatient"
             android:label="@string/title_activity_add_patient"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:noHistory="true">
-
+            android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity android:name=".ViewImages" >
         </activity>

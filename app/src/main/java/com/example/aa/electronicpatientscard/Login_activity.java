@@ -49,6 +49,7 @@ public class Login_activity extends AppCompatActivity implements View.OnClickLis
         String username = Login_pref.getString(PREFS_USERNAME,null);
         String password = Login_pref.getString(PREFS_PASSWORD,null);
 
+        //UI
         checkBox=(CheckBox)findViewById(R.id.checkBox);
         editTextLogin=(EditText)findViewById(R.id.editTextLogin);
         editTextPassword=(EditText)findViewById(R.id.editTextPassword);
@@ -107,7 +108,7 @@ public class Login_activity extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onClick(View v) {
         if(v==buttonLogin){
-            //Delete username and password if checkbox is not checked and user press login
+            //Delete username and password if checkbox is not checked
             if(checkBox.isChecked()==false){
                 getSharedPreferences(PREFS_NAME,MODE_PRIVATE).edit().putString(PREFS_USERNAME,"").putString(PREFS_PASSWORD,"").commit();
             }

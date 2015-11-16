@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class PatientsList extends AppCompatActivity implements ListView.OnItemClickListener, View.OnClickListener{
-    //Basic UI
     private ListView listViewPatients;
     private String JSON_STRING;
     private Button buttonAddPatient;
@@ -30,7 +29,7 @@ public class PatientsList extends AppCompatActivity implements ListView.OnItemCl
         setContentView(R.layout.activity_patients_list);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        //UI
         buttonAddPatient=(Button)findViewById(R.id.buttonAddNew);
         listViewPatients=(ListView)findViewById(R.id.listView);
 
@@ -65,7 +64,7 @@ public class PatientsList extends AppCompatActivity implements ListView.OnItemCl
         GetJSON gj= new GetJSON();
         gj.execute();
     }
-    //List all patients recived from server to listView
+    //List all patients received from server to listView
     private void showPatient() {
         JSONObject jsonObject = null;
         ArrayList<HashMap<String,String>> list = new ArrayList<HashMap<String, String>>();
