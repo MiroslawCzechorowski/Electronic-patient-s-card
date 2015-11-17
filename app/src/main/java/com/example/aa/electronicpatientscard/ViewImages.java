@@ -32,7 +32,7 @@ public class ViewImages extends AppCompatActivity implements AdapterView.OnItemC
     private Button buttonUploadImage;
     private int PICK_IMAGE_REQUEST = 1;
     private Uri filePath;
-    private Bitmap bitmap;
+    private Bitmap bitmap,bitmap2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,12 +74,6 @@ public class ViewImages extends AppCompatActivity implements AdapterView.OnItemC
             filePath = data.getData();
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
-                int width=bitmap.getWidth();
-                int height=bitmap.getHeight();
-                //Scale image when is too big
-                if(width>3000 || height >3000) {
-                    bitmap.createScaledBitmap(bitmap,1600,1600, false);
-                }
                 uploadImage();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -117,6 +111,12 @@ public class ViewImages extends AppCompatActivity implements AdapterView.OnItemC
             @Override
             protected String doInBackground(Bitmap... params) {
                 Bitmap bitmap = params[0];
+                int width=bitmap.getWidth();
+                int height=bitmap.getHeight();
+                //Scale image when is too big
+                if(width>3000 || height >3000) {
+                    bitmap=bitmap.createScaledBitmap(bitmap,1600,1600, false);
+                }
                 String uploadImage = getStringImage(bitmap);
                 HashMap<String,String> data = new HashMap<>();
                 data.put(Config.KEY_UPLOAD, uploadImage);
