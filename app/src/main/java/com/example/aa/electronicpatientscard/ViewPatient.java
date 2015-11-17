@@ -38,8 +38,9 @@ public class ViewPatient extends AppCompatActivity implements View.OnClickListen
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Intent intent =getIntent();
+        //Assign ID clicked patient
         id=intent.getStringExtra(Config.PATIENT_ID);
-
+        //UI
         relativeLayout=(RelativeLayout)findViewById(R.id.relativeLayout);
         relativeLayout.requestFocus();
 
@@ -56,21 +57,24 @@ public class ViewPatient extends AppCompatActivity implements View.OnClickListen
         buttonUpdate.setOnClickListener(this);
         buttonDelete.setOnClickListener(this);
         editTextID.setText(id);
+        //List all data from patient
         getPatient();
 
     }
 
 
     private void getPatient(){
-        class GetEmployee extends AsyncTask<Void,Void,String> {
+        class GetPatient extends AsyncTask<Void,Void,String> {
             ProgressDialog loading;
             @Override
+            //Show loading dialog
             protected void onPreExecute() {
                 super.onPreExecute();
                 loading = ProgressDialog.show(ViewPatient.this,"Fetching...","Wait...",false,false);
             }
 
             @Override
+            //Dismiss loading dialog and show patient data
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
                 loading.dismiss();
@@ -78,17 +82,19 @@ public class ViewPatient extends AppCompatActivity implements View.OnClickListen
             }
 
             @Override
+            //Sed get request with patient id to server
             protected String doInBackground(Void... params) {
                 RequestHandler rh = new RequestHandler();
                 String s = rh.sendGetRequestParam(Config.URL_GET_PATIENT,id);
                 return s;
             }
         }
-        GetEmployee ge = new GetEmployee();
+        GetPatient ge = new GetPatient();
         ge.execute();
     }
 
     private void showPatient(String json){
+        //Assign receive data from server to patients data
         try {
             JSONObject jsonObject = new JSONObject(json);
             JSONArray result = jsonObject.getJSONArray(Config.TAG_JSON_ARRAY);
@@ -105,7 +111,7 @@ public class ViewPatient extends AppCompatActivity implements View.OnClickListen
         }
     }
 
-
+    //Method that allows update patients data and send those changes to server
     private void updatePatient(){
         final String name = editTextName.getText().toString().trim();
         final String lastname = editTextLastname.getText().toString().trim();
@@ -126,6 +132,7 @@ public class ViewPatient extends AppCompatActivity implements View.OnClickListen
             }
 
             @Override
+            //send updated data to server
             protected String doInBackground(Void... params) {
                 HashMap<String,String> hashMap = new HashMap<>();
                 hashMap.put(Config.KEY_PATIENT_ID,id);
@@ -141,7 +148,7 @@ public class ViewPatient extends AppCompatActivity implements View.OnClickListen
         UpdatePatient up = new UpdatePatient();
         up.execute();
     }
-
+    //Method that allows user to delete patient from server
     private void deletePatient(){
         class DeletePatient extends AsyncTask<Void,Void,String> {
             ProgressDialog loading;
@@ -170,7 +177,7 @@ public class ViewPatient extends AppCompatActivity implements View.OnClickListen
         DeletePatient dp = new DeletePatient();
         dp.execute();
     }
-
+    //Patient delete confirmation dialog
     private void confirmDeletePatient(){
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setMessage("Are you sure you want to delete this patient?");
@@ -195,7 +202,7 @@ public class ViewPatient extends AppCompatActivity implements View.OnClickListen
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
     }
-
+    //Handle buttons click
     @Override
     public void onClick(View v) {
         if(v == buttonUpdate){

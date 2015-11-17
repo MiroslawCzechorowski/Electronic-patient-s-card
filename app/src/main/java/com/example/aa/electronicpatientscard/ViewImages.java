@@ -39,7 +39,9 @@ public class ViewImages extends AppCompatActivity implements AdapterView.OnItemC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_images);
         Intent intent =getIntent();
+        //Assign ID selected patient
         id=intent.getStringExtra(Config.PATIENT_ID);
+        //UI
         gridView=(GridView)findViewById(R.id.gridView);
         buttonUploadImage=(Button)findViewById(R.id.buttonUploadImage);
 
@@ -51,10 +53,10 @@ public class ViewImages extends AppCompatActivity implements AdapterView.OnItemC
             }
         });
 
-
+        //Get images urls from server
         getURLs();
     }
-
+    //Show image selector when uploading new images
     private void showFileChooser() {
         Intent intent = new Intent();
         intent.setType("image/*");
@@ -62,6 +64,7 @@ public class ViewImages extends AppCompatActivity implements AdapterView.OnItemC
         startActivityForResult(Intent.createChooser(intent, "Select image"), PICK_IMAGE_REQUEST);
     }
 
+    //Get selected image for upload
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -71,13 +74,19 @@ public class ViewImages extends AppCompatActivity implements AdapterView.OnItemC
             filePath = data.getData();
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
+                int width=bitmap.getWidth();
+                int height=bitmap.getHeight();
+                //Scale image when is too big
+                if(width>3000 || height >3000) {
+                    bitmap.createScaledBitmap(bitmap,1600,1600, false);
+                }
                 uploadImage();
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
-
+    //Decode image to base64
     public String getStringImage(Bitmap bmp){
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
@@ -85,7 +94,7 @@ public class ViewImages extends AppCompatActivity implements AdapterView.OnItemC
         String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
         return encodedImage;
     }
-
+    //Upload image to server
     private void uploadImage(){
         class UploadImage extends AsyncTask<Bitmap,Void,String>{
 
@@ -119,7 +128,7 @@ public class ViewImages extends AppCompatActivity implements AdapterView.OnItemC
         UploadImage ui = new UploadImage();
         ui.execute(bitmap);
     }
-
+    //Method that list all images in gridView
     private void getImages(){
         class GetImages extends AsyncTask<Void,Void,Void> {
             ProgressDialog loading;
@@ -133,7 +142,7 @@ public class ViewImages extends AppCompatActivity implements AdapterView.OnItemC
             protected void onPostExecute(Void v) {
                 super.onPostExecute(v);
                 loading.dismiss();
-                Toast.makeText(ViewImages.this, "Success + id="+id, Toast.LENGTH_LONG).show();
+                Toast.makeText(ViewImages.this, "Success!", Toast.LENGTH_LONG).show();
                 ImageAdapter imageAdapter= new ImageAdapter(ViewImages.this,GetAllImages.imageURLs,GetAllImages.bitmaps);
                 gridView.setAdapter(imageAdapter);
             }
@@ -152,7 +161,7 @@ public class ViewImages extends AppCompatActivity implements AdapterView.OnItemC
         GetImages getImages = new GetImages();
         getImages.execute();
     }
-
+    //Download images urls from server
     private void getURLs() {
         class GetURLs extends AsyncTask<String,Void,String>{
             ProgressDialog loading;
@@ -167,36 +176,22 @@ public class ViewImages extends AppCompatActivity implements AdapterView.OnItemC
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
                 loading.dismiss();
+                //Show all images from received urls
                 getAlImages = new GetAllImages(s);
                 getImages();
             }
-
+            //get images urls from selected patient
             @Override
             protected String doInBackground(String... strings) {
-                BufferedReader bufferedReader = null;
-                try {
-                    URL url = new URL(strings[0]);
-                    HttpURLConnection con = (HttpURLConnection) url.openConnection();
-                    StringBuilder sb = new StringBuilder();
-
-                    bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
-
-                    String json;
-                    while((json = bufferedReader.readLine())!= null){
-                        sb.append(json+"\n");
-                    }
-
-                    return sb.toString().trim();
-
-                }catch(Exception e){
-                    return null;
-                }
+               RequestHandler rh = new RequestHandler();
+                String s=rh.sendGetImgRequestParam(strings);
+                return s;
             }
         }
         GetURLs gu = new GetURLs();
         gu.execute(Config.URL_GET_IMAGE+id);
     }
-
+    //Handle full image view when clicked image
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         Intent intent = new Intent(this, ViewFullImage.class);

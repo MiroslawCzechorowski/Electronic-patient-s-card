@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class PatientsList extends AppCompatActivity implements ListView.OnItemClickListener, View.OnClickListener{
+    //UI
     private ListView listViewPatients;
     private String JSON_STRING;
     private Button buttonAddPatient;
@@ -41,12 +42,13 @@ public class PatientsList extends AppCompatActivity implements ListView.OnItemCl
     private void getJSON() {
         class GetJSON extends AsyncTask<Void,Void,String>{
             ProgressDialog loading;
+            //Show loading dialog before connect to server
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
                 loading = ProgressDialog.show(PatientsList.this,"Fetching Data","Wait...",false,false);
             }
-
+            //Dismiss loading dialog and list all patients received from server
             @Override
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
@@ -54,6 +56,7 @@ public class PatientsList extends AppCompatActivity implements ListView.OnItemCl
                 JSON_STRING = s;
                 showPatient();
             }
+            //Send get data request do server
             @Override
             protected String doInBackground(Void... params) {
                 RequestHandler rh = new RequestHandler();
@@ -69,6 +72,7 @@ public class PatientsList extends AppCompatActivity implements ListView.OnItemCl
         JSONObject jsonObject = null;
         ArrayList<HashMap<String,String>> list = new ArrayList<HashMap<String, String>>();
         try {
+            //Put result from server into array and assign it to ID and last name
             jsonObject = new JSONObject(JSON_STRING);
             JSONArray result = jsonObject.getJSONArray(Config.TAG_JSON_ARRAY);
 
@@ -86,7 +90,7 @@ public class PatientsList extends AppCompatActivity implements ListView.OnItemCl
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
+        //View for patients list
         ListAdapter adapter = new SimpleAdapter(
                 PatientsList.this, list, R.layout.list_item,
                 new String[]{Config.TAG_ID,Config.TAG_LASTNAME},

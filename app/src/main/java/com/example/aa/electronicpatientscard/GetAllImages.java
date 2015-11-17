@@ -19,7 +19,7 @@ public class GetAllImages {
 
     private String json;
     private JSONArray urls;
-
+    //Constructor
     public GetAllImages(String json){
         this.json = json;
         try {
@@ -29,7 +29,7 @@ public class GetAllImages {
             e.printStackTrace();
         }
     }
-
+    //Get bitmap from url
     private Bitmap getImage(JSONObject jo){
         URL url = null;
         Bitmap image = null;
@@ -45,7 +45,7 @@ public class GetAllImages {
         }
         return image;
     }
-
+    //Get all images from received urls and add them to bitmaps array
     public void getAllImages() throws JSONException {
         bitmaps = new Bitmap[urls.length()];
 

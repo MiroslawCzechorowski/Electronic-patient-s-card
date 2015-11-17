@@ -29,7 +29,7 @@ public class AddPatient extends AppCompatActivity implements  View.OnClickListen
         setContentView(R.layout.activity_add_patient);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        //UI
         editTextID=(EditText)findViewById(R.id.editTextID);
         editTextName=(EditText)findViewById(R.id.editTextName);
         editTextVorname=(EditText)findViewById(R.id.editTextAddVorname);
@@ -40,11 +40,14 @@ public class AddPatient extends AppCompatActivity implements  View.OnClickListen
         buttonCancel.setOnClickListener(this);
         buttonAdd.setOnClickListener(this);
     }
+    //Handle buttons click
     @Override
     public void onClick(View v) {
         if(v == buttonAdd){
+            //add new patient and send data to server
             final String id =editTextID.getText().toString().trim();
             addPatient();
+            //Ask user about adding image to new user
             AlertDialog.Builder addImages = new AlertDialog.Builder(this);
             addImages.setMessage("Do you want add images ?").setCancelable(false);
             addImages.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -72,7 +75,7 @@ public class AddPatient extends AppCompatActivity implements  View.OnClickListen
     }
 
     private void addPatient() {
-
+            //New user data
             final String id = editTextID.getText().toString().trim();
             final String name = editTextName.getText().toString().trim();
             final String lastname = editTextVorname.getText().toString().trim();
@@ -83,12 +86,14 @@ public class AddPatient extends AppCompatActivity implements  View.OnClickListen
                 ProgressDialog loading;
 
                 @Override
+                //Show loading dialog before execute
                 protected void onPreExecute() {
                     super.onPreExecute();
                     loading = ProgressDialog.show(AddPatient.this,"Adding...","Wait...",false,false);
                 }
 
                 @Override
+                //Dismiss loading dialog after execute
                 protected void onPostExecute(String s) {
                     super.onPostExecute(s);
                     loading.dismiss();
@@ -96,13 +101,13 @@ public class AddPatient extends AppCompatActivity implements  View.OnClickListen
                 }
 
                 @Override
+                //Send new user data to server
                 protected String doInBackground(Void... v) {
                     HashMap<String,String> params = new HashMap<>();
                     params.put(Config.KEY_PATIENT_NAME,name);
                     params.put(Config.KEY_PATIENT_HISTORY,history);
                     params.put(Config.KEY_PATIENT_LASTNAME,lastname);
                     params.put(Config.KEY_PATIENT_ID,id);
-                    // TODO: 28.10.2015 insert images
 
                     RequestHandler rh = new RequestHandler();
                     String res = rh.sendPostRequest(Config.URL_ADD, params);

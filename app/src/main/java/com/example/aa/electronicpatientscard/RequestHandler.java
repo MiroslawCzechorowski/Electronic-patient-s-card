@@ -103,6 +103,21 @@ public class RequestHandler {
         return sb.toString();
     }
 
+    public String sendGetImgRequestParam(String... strings){
+        StringBuilder sb = new StringBuilder();
+        try {
+            URL url = new URL(strings[0]);
+            HttpURLConnection con = (HttpURLConnection) url.openConnection();
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
+            String s;
+            while((s = bufferedReader.readLine())!= null){
+                sb.append(s+"\n");
+            }
+        }catch(Exception e){
+        }
+        return sb.toString().trim();
+    }
+
     private String getPostDataString(HashMap<String, String> params) throws UnsupportedEncodingException {
         StringBuilder result = new StringBuilder();
         boolean first = true;

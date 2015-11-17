@@ -25,7 +25,7 @@ import java.util.HashMap;
 
 public class Login_activity extends AppCompatActivity implements View.OnClickListener{
 
-    //Shared preferences data
+    //Shared preferences data that stores last username and password
     public static final String PREFS_NAME="LoginData";
     private static final String PREFS_USERNAME = "username";
     private static final String PREFS_PASSWORD="password";
@@ -63,7 +63,7 @@ public class Login_activity extends AppCompatActivity implements View.OnClickLis
             editTextLogin.setText(username);
             editTextPassword.setText(password);
         }
-        //Ask user for turn on network connection or quit application
+        //If there is no connection to the internet, turn it on or quit application.
         if(isOnline()==false){
             AlertDialog.Builder turnOnInternet = new AlertDialog.Builder(this);
             turnOnInternet.setMessage("Connect to internet or quit application!").setCancelable(false);
@@ -104,7 +104,7 @@ public class Login_activity extends AppCompatActivity implements View.OnClickLis
         }
         return super.onOptionsItemSelected(item);
     }
-
+    //Handle button click
     @Override
     public void onClick(View v) {
         if(v==buttonLogin){
@@ -163,7 +163,7 @@ public class Login_activity extends AppCompatActivity implements View.OnClickLis
         LoginUser newLogin = new LoginUser();
         newLogin.execute();
     }
-    //Check for network connection
+    //Check the connection to the Internet.
     public boolean isOnline(){
         ConnectivityManager connectivityManager=(ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo info=connectivityManager.getActiveNetworkInfo();
