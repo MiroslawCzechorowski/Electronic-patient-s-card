@@ -187,7 +187,7 @@ public class ViewPatient extends AppCompatActivity implements View.OnClickListen
                     @Override
                     public void onClick(DialogInterface arg0, int arg1) {
                         deletePatient();
-                        startActivity(new Intent(ViewPatient.this,ViewPatient.class));
+                        startActivity(new Intent(ViewPatient.this, PatientsList.class));
                     }
                 });
 
@@ -201,6 +201,7 @@ public class ViewPatient extends AppCompatActivity implements View.OnClickListen
 
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
+        //onBackPressed();
     }
     //Handle buttons click
     @Override
@@ -218,7 +219,7 @@ public class ViewPatient extends AppCompatActivity implements View.OnClickListen
 
         if(v == buttonDelete){
             confirmDeletePatient();
-            startActivity(new Intent(ViewPatient.this, PatientsList.class));
+            //startActivity(new Intent(ViewPatient.this, PatientsList.class));
         }
     }
 }

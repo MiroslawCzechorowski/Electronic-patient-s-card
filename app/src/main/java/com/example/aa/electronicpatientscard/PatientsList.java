@@ -38,6 +38,13 @@ public class PatientsList extends AppCompatActivity implements ListView.OnItemCl
         buttonAddPatient.setOnClickListener(this);
         getJSON();
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getJSON();
+    }
+
     //get JSON data from server
     private void getJSON() {
         class GetJSON extends AsyncTask<Void,Void,String>{
@@ -95,7 +102,6 @@ public class PatientsList extends AppCompatActivity implements ListView.OnItemCl
                 PatientsList.this, list, R.layout.list_item,
                 new String[]{Config.TAG_ID,Config.TAG_LASTNAME},
                 new int[]{R.id.id, R.id.lastname});
-
         listViewPatients.setAdapter(adapter);
     }
     //See patient detail
@@ -112,6 +118,7 @@ public class PatientsList extends AppCompatActivity implements ListView.OnItemCl
     public void onClick(View v) {
         if(v==buttonAddPatient){
             Intent intent=new Intent(PatientsList.this,AddPatient.class);
+            intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
             startActivity(intent);
         }
     }

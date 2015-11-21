@@ -60,7 +60,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Vorname"
+        android:text="Lastname"
         android:id="@+id/textViewLastName"
         android:layout_below="@+id/editTextName"
         android:layout_alignParentLeft="true"
@@ -108,16 +108,6 @@
         android:layout_alignParentStart="true"
         android:layout_alignRight="@+id/editTextAddVorname"
         android:layout_alignEnd="@+id/editTextAddVorname" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Images"
-        android:id="@+id/textView4"
-        android:layout_below="@+id/editTextHistory"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
 
     <Button
         android:layout_width="wrap_content"
