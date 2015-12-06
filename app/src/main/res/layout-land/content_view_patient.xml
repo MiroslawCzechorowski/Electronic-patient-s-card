@@ -11,7 +11,8 @@
     tools:context="com.example.aa.electronicpatientscard.ViewPatient"
     android:focusable="true"
     android:focusableInTouchMode="true"
-    android:id="@+id/relativeLayout">
+    android:id="@+id/relativeLayout"
+    android:background="#FFFFFF">
 
     <TextView
         android:layout_width="wrap_content"
@@ -116,7 +117,9 @@
         android:id="@+id/buttonUpdate"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:background="@drawable/buttonshape"
+        android:textColor="#ffffff"/>
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -125,7 +128,9 @@
         android:text="Images"
         android:id="@+id/buttonViewImages"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/buttonshape"
+        android:textColor="#ffffff"/>
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -135,6 +140,8 @@
         android:id="@+id/buttonDelete"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/buttonshape"
+        android:textColor="#ffffff"/>
 
 </RelativeLayout>
