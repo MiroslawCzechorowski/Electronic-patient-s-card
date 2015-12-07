@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="observation_array">
+        <item>Blood examination</item>
+        <item>Blood pressure</item>
+        <item>Urine test</item>
+        <item>Temperature</item>
+        <item>Sugar</item>
+    </string-array>
+    - See more at: http://www.ahotbrew.com/android-dropdown-spinner-example/#sthash.pl5oIPAg.dpuf
+</resources>

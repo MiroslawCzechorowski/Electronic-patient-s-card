@@ -7,4 +7,5 @@
     <string name="title_activity_patients_list">PatientsList</string>
     <string name="title_activity_view_patient">ViewPatient</string>
     <string name="title_activity_add_patient">AddPatient</string>
+    <string name="sex">Sex</string>
 </resources>

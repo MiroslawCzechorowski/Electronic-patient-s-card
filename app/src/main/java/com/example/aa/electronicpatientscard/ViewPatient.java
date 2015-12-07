@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -26,10 +27,11 @@ public class ViewPatient extends AppCompatActivity implements View.OnClickListen
     private EditText editTextLastname;
     private EditText editTextHistory;
     private RelativeLayout relativeLayout;
-    private Button buttonImages;
     private Button buttonUpdate;
     private Button buttonDelete;
     private String id;
+    private EditText editTextSex;
+    private EditText editTextDateOfBirth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +39,40 @@ public class ViewPatient extends AppCompatActivity implements View.OnClickListen
         setContentView(R.layout.activity_view_patient);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        tabLayout.addTab(tabLayout.newTab().setText("Person"));
+        tabLayout.addTab(tabLayout.newTab().setText("Images"));
+        tabLayout.addTab(tabLayout.newTab().setText("Observation"));
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+            if (tab.getPosition()==2){
+                Intent intent = new Intent(getApplicationContext(), ViewObservation.class);
+                intent.putExtra(Config.PATIENT_ID,id);
+                startActivity(intent);
+            }else if (tab.getPosition()==1){
+                Intent intent = new Intent(getApplicationContext(), ViewImages.class);
+                intent.putExtra(Config.PATIENT_ID,id);
+                startActivity(intent);
+            }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
         Intent intent =getIntent();
+
         //Assign ID clicked patient
         id=intent.getStringExtra(Config.PATIENT_ID);
         //UI
@@ -48,12 +83,11 @@ public class ViewPatient extends AppCompatActivity implements View.OnClickListen
         editTextName=(EditText)findViewById(R.id.editTextName);
         editTextLastname=(EditText)findViewById(R.id.editTextLastName);
         editTextHistory=(EditText)findViewById(R.id.editTextHistory);
+        editTextDateOfBirth=(EditText)findViewById(R.id.editTextDateOfBirth);
+        editTextSex=(EditText)findViewById(R.id.editTextSex);
 
         buttonDelete=(Button)findViewById(R.id.buttonDelete);
         buttonUpdate=(Button)findViewById(R.id.buttonUpdate);
-        buttonImages=(Button)findViewById(R.id.buttonViewImages);
-
-        buttonImages.setOnClickListener(this);
         buttonUpdate.setOnClickListener(this);
         buttonDelete.setOnClickListener(this);
         editTextID.setText(id);
@@ -79,6 +113,24 @@ public class ViewPatient extends AppCompatActivity implements View.OnClickListen
                 super.onPostExecute(s);
                 loading.dismiss();
                 showPatient(s);
+
+                // Check from ID patient sex
+                String sex = editTextID.getText().toString().trim();
+                sex = sex.substring(9, 10);
+                if (Integer.parseInt(sex) % 2 == 0) {
+                    editTextSex.setText("Female");
+                } else editTextSex.setText("Male");
+
+                //Check patients date of birth
+                String idText = editTextID.getText().toString().trim();
+                String date = idText.substring(0, 2);
+                if (Integer.parseInt(date) > 15) {
+                    editTextDateOfBirth.setText("19" + date + ".");
+                } else editTextDateOfBirth.setText("20" + date + ".");
+                date=idText.substring(3,5);
+                editTextDateOfBirth.setText(editTextDateOfBirth.getText()+date+".");
+                date=idText.substring(5,7);
+                editTextDateOfBirth.setText(editTextDateOfBirth.getText()+date);
             }
 
             @Override
@@ -209,12 +261,6 @@ public class ViewPatient extends AppCompatActivity implements View.OnClickListen
         if(v == buttonUpdate){
             updatePatient();
             startActivity(new Intent(ViewPatient.this,PatientsList.class));
-        }
-
-        if(v==buttonImages){
-            Intent intent = new Intent(this, ViewImages.class);
-            intent.putExtra(Config.PATIENT_ID,id);
-            startActivity(intent);
         }
 
         if(v == buttonDelete){

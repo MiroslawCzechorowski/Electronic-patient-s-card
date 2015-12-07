@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.provider.MediaStore;
+import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
@@ -17,12 +18,8 @@ import android.widget.Toast;
 
 import org.json.JSONException;
 
-import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.HashMap;
 
 public class ViewImages extends AppCompatActivity implements AdapterView.OnItemClickListener{
@@ -32,12 +29,44 @@ public class ViewImages extends AppCompatActivity implements AdapterView.OnItemC
     private Button buttonUploadImage;
     private int PICK_IMAGE_REQUEST = 1;
     private Uri filePath;
-    private Bitmap bitmap,bitmap2;
+    private Bitmap bitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_images);
+
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        tabLayout.addTab(tabLayout.newTab().setText("Images"));
+        tabLayout.addTab(tabLayout.newTab().setText("Person"));
+        tabLayout.addTab(tabLayout.newTab().setText("Observation"));
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                if (tab.getPosition()==2){
+                    Intent intent = new Intent(getApplicationContext(), ViewObservation.class);
+                    intent.putExtra(Config.PATIENT_ID,id);
+                    startActivity(intent);
+                }else if (tab.getPosition()==1){
+                    Intent intent = new Intent(getApplicationContext(), ViewPatient.class);
+                    intent.putExtra(Config.PATIENT_ID,id);
+                    startActivity(intent);
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
         Intent intent =getIntent();
         //Assign ID selected patient
         id=intent.getStringExtra(Config.PATIENT_ID);

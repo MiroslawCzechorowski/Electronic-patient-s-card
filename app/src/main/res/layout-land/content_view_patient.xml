@@ -53,8 +53,7 @@
         android:ems="10"
         android:id="@+id/editTextName"
         android:layout_below="@+id/textViewName"
-        android:layout_alignRight="@+id/buttonViewImages"
-        android:layout_alignEnd="@+id/buttonViewImages" />
+        android:layout_centerHorizontal="true" />
 
 
 
@@ -62,8 +61,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="History"
-        android:id="@+id/textViewLastName"
+        android:text="Sex"
+        android:id="@+id/textViewSex"
         android:layout_below="@+id/editTextName"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
@@ -87,23 +86,9 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_below="@+id/textViewLastName"
+        android:layout_below="@+id/textViewSex"
 >
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textMultiLine"
-            android:ems="10"
-            android:id="@+id/editTextHistory"
-            android:layout_below="@+id/textViewLastName"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_above="@+id/buttonUpdate"
-            android:layout_alignRight="@+id/buttonDelete"
-            android:layout_alignEnd="@+id/buttonDelete"
-            android:maxLines="3"
-            android:elegantTextHeight="false" />
     </ScrollView>
 
 
@@ -125,17 +110,6 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:text="Images"
-        android:id="@+id/buttonViewImages"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/buttonshape"
-        android:textColor="#ffffff"/>
-
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
         android:text="Delete"
         android:id="@+id/buttonDelete"
         android:layout_alignParentBottom="true"
@@ -143,5 +117,49 @@
         android:layout_alignParentEnd="true"
         android:background="@drawable/buttonshape"
         android:textColor="#ffffff"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Date of birth"
+        android:id="@+id/textViewDateOfBirth"
+        android:layout_below="@+id/editTextID"
+        android:layout_toRightOf="@+id/editTextID"
+        android:layout_toEndOf="@+id/editTextID" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:id="@+id/editTextHistory"
+        android:maxLines="3"
+        android:elegantTextHeight="false"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/editTextSex"
+        android:layout_below="@+id/scrollView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_toLeftOf="@+id/textViewDateOfBirth"
+        android:layout_toStartOf="@+id/textViewDateOfBirth" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/editTextDateOfBirth"
+        android:layout_below="@+id/scrollView"
+        android:layout_toRightOf="@+id/editTextSex"
+        android:layout_toEndOf="@+id/editTextSex" />
 
 </RelativeLayout>

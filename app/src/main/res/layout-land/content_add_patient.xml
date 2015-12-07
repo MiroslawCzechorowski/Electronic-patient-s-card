@@ -62,7 +62,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Last name"
-        android:id="@+id/textViewLastName"
+        android:id="@+id/textViewSex"
         android:layout_above="@+id/editTextName"
         android:layout_toRightOf="@+id/editTextName"
         android:layout_toEndOf="@+id/editTextName" />
@@ -73,7 +73,7 @@
         android:inputType="textPersonName"
         android:ems="10"
         android:id="@+id/editTextAddVorname"
-        android:layout_below="@+id/textViewLastName"
+        android:layout_below="@+id/textViewSex"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_toRightOf="@+id/editTextName"
