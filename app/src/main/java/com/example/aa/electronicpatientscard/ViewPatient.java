@@ -25,7 +25,6 @@ public class ViewPatient extends AppCompatActivity implements View.OnClickListen
     private EditText editTextID;
     private EditText editTextName;
     private EditText editTextLastname;
-    private EditText editTextHistory;
     private RelativeLayout relativeLayout;
     private Button buttonUpdate;
     private Button buttonDelete;
@@ -82,7 +81,6 @@ public class ViewPatient extends AppCompatActivity implements View.OnClickListen
         editTextID=(EditText)findViewById(R.id.editTextID);
         editTextName=(EditText)findViewById(R.id.editTextName);
         editTextLastname=(EditText)findViewById(R.id.editTextLastName);
-        editTextHistory=(EditText)findViewById(R.id.editTextHistory);
         editTextDateOfBirth=(EditText)findViewById(R.id.editTextDateOfBirth);
         editTextSex=(EditText)findViewById(R.id.editTextSex);
 
@@ -153,11 +151,8 @@ public class ViewPatient extends AppCompatActivity implements View.OnClickListen
             JSONObject c = result.getJSONObject(0);
             String name = c.getString(Config.TAG_NAME);
             String lastname = c.getString(Config.TAG_LASTNAME);
-            String history = c.getString(Config.TAG_HISTORY);
             editTextName.setText(name);
             editTextLastname.setText(lastname);
-            editTextHistory.setText(history);
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -167,7 +162,6 @@ public class ViewPatient extends AppCompatActivity implements View.OnClickListen
     private void updatePatient(){
         final String name = editTextName.getText().toString().trim();
         final String lastname = editTextLastname.getText().toString().trim();
-        final String history = editTextHistory.getText().toString().trim();
 
         class UpdatePatient extends AsyncTask<Void,Void,String>{
             ProgressDialog loading;
@@ -190,7 +184,6 @@ public class ViewPatient extends AppCompatActivity implements View.OnClickListen
                 hashMap.put(Config.KEY_PATIENT_ID,id);
                 hashMap.put(Config.KEY_PATIENT_NAME,name);
                 hashMap.put(Config.KEY_PATIENT_LASTNAME,lastname);
-                hashMap.put(Config.KEY_PATIENT_HISTORY,history);
                 RequestHandler rh = new RequestHandler();
                 String s = rh.sendPostRequest(Config.URL_UPDATE_PATIENT, hashMap);
                 return s;

@@ -20,7 +20,6 @@ public class AddPatient extends AppCompatActivity implements  View.OnClickListen
     private EditText editTextID;
     private EditText editTextName;
     private EditText editTextVorname;
-    private EditText editTextHistory;
     private Button buttonAdd;
     private Button buttonCancel;
     @Override
@@ -33,7 +32,6 @@ public class AddPatient extends AppCompatActivity implements  View.OnClickListen
         editTextID=(EditText)findViewById(R.id.editTextID);
         editTextName=(EditText)findViewById(R.id.editTextName);
         editTextVorname=(EditText)findViewById(R.id.editTextAddVorname);
-        editTextHistory=(EditText)findViewById(R.id.editTextHistory);
         buttonAdd=(Button)findViewById(R.id.buttonAddPatient);
         buttonCancel=(Button)findViewById(R.id.buttonCancel);
 
@@ -79,7 +77,6 @@ public class AddPatient extends AppCompatActivity implements  View.OnClickListen
             final String id = editTextID.getText().toString().trim();
             final String name = editTextName.getText().toString().trim();
             final String lastname = editTextVorname.getText().toString().trim();
-            final String history= editTextHistory.getText().toString().trim();
 
             class AddPatients extends AsyncTask<Void,Void,String> {
 
@@ -105,7 +102,6 @@ public class AddPatient extends AppCompatActivity implements  View.OnClickListen
                 protected String doInBackground(Void... v) {
                     HashMap<String,String> params = new HashMap<>();
                     params.put(Config.KEY_PATIENT_NAME,name);
-                    params.put(Config.KEY_PATIENT_HISTORY,history);
                     params.put(Config.KEY_PATIENT_LASTNAME,lastname);
                     params.put(Config.KEY_PATIENT_ID,id);
 
